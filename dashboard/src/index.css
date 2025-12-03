@@ -1,0 +1,50 @@
+/* Base smooth UI feel */
+body {
+  margin: 0;
+  font-family: "Inter", sans-serif;
+  color: #e5e7eb;
+  background: #0d1117;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Add slight glow to headings */
+h1, h2, h3 {
+  text-shadow: 0px 0px 8px rgba(56, 189, 248, 0.15);
+}
+
+/* Cards look cleaner now */
+.card {
+  background: rgba(31, 41, 55, 0.6);
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(75, 85, 99, 0.4);
+  border-radius: 12px;
+  padding: 20px;
+  transition: 0.25s ease;
+}
+.card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(96, 165, 250, 0.5);
+}
+
+/* Stylish Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #4b5563;
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #6b7280;
+}
+
+::-webkit-scrollbar-track {
+  background: #1f2937;
+}
+
+/* Smooth section transitions */
+section {
+  transition: all 0.3s ease-in-out;
+}

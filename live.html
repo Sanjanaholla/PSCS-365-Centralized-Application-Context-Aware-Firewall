@@ -1,0 +1,31 @@
+<!doctype html>
+<html>
+  <body>
+    <h3>Live Network Events</h3>
+    <table id="tbl" border="1" style="width:100%;border-collapse:collapse">
+      <thead><tr><th>Time</th><th>Host</th><th>Process</th><th>Local</th><th>Remote</th><th>Label</th><th>Score</th></tr></thead>
+      <tbody></tbody>
+    </table>
+    <script>
+      const ws = new WebSocket("ws://localhost:8005/ws");
+      ws.onmessage = (ev) => {
+        const msg = JSON.parse(ev.data);
+        if (msg.type !== 'event') return;
+        const p = msg.payload;
+        const tbody = document.querySelector("#tbl tbody");
+        const row = document.createElement("tr");
+        row.innerHTML = `<td>${p.timestamp||new Date().toISOString()}</td>
+                         <td>${p.host||''}</td>
+                         <td>${p.process||''}</td>
+                         <td>${p.local||''}</td>
+                         <td>${p.remote||''}</td>
+                         <td style="font-weight:bold;color:${p.label==='Anomaly'?'red':'black'}">${p.label||''}</td>
+                         <td>${p.score||''}</td>`;
+        tbody.prepend(row);
+        while (tbody.children.length > 200) tbody.removeChild(tbody.lastChild);
+      };
+      ws.onopen = () => console.log('Connected to server WebSocket');
+      ws.onclose = () => console.log('WebSocket closed');
+    </script>
+  </body>
+</html>
